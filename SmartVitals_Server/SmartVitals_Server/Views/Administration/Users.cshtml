@@ -1,0 +1,24 @@
+﻿@*@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<h2>Users</h2>
+@(Html.Telerik().Grid(Model)
+        .Name("Tests")
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.TestId).Width(10);
+            columns.Bound(o => o.Date).Width(150);
+            columns.Bound(o => o.Description).Width(300);
+            columns.Bound(o => o.Latitude).Width(20);
+            columns.Bound(o => o.Longitude).Width(20);
+            columns.Command(commands => commands
+                   .Custom("viewTestDetails")
+                   .Text("View")
+                   .DataRouteValues(route => route.Add(o => o.TestId).RouteKey("TestId"))
+                   .Action("TestDetails", "Home"))
+                   .Title("Actions")
+               .HtmlAttributes(new { style = "text-align: center" })
+               .Width(20);
+        })*@

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, SmartVitals_AppActivity!</string>
+    <string name="app_name">SmartVitals</string>
+    <color name="black">#000000</color>
+    <color name="smartvitals_a">#2d2d2d</color>
+    <color name="smartvitals_b">#b9b9b9</color>
+    <color name="smartvitals_c">#d0d0d0</color>
+    <string name="zero">0</string>
+    <string name="empty"></string>
+    <string name="login">http://10.0.2.2:1234/json/AuthenticateUser</string>
+    <string name="update_profile">http://10.0.2.2:1234/json/UpdateProfile</string>
+    <string name="history">History</string>
+    <string name="respiration_rate">Respiration Rate</string>
+    <string name="posture">Posture</string>
+    <string name="skin_temperature">Skin Temperature</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="ecg">ECG</string>
+</resources>

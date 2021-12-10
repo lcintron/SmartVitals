@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Default Web Site/SmartVitals.Web_deploy" />
+  <setParameter name="ApplicationServices-Web.config Connection String" value="data source=mssql0925.dotnet-host.com;Initial Catalog=smartvitalscontext; User ID=sv_user; Password=Temp1234!" />
+  <setParameter name="SmartVitalsContext-Web.config Connection String" value="data source=mssql0925.dotnet-host.com;Initial Catalog=smartvitalscontext; User ID=sv_user; Password=Temp1234!" />
+</parameters>

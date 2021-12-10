@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bck"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/topbar"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dip"
+            android:background="@null"
+            android:src="@drawable/back" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="275dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dip" >
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/summaryinfo"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/lblAvgPulse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dip"
+                android:layout_marginTop="55dip"
+                android:text="@string/zero"
+                android:textColor="@color/black"
+                android:textSize="25px" />
+            
+            <TextView
+                android:id="@+id/lblAvgECG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dip"
+                android:paddingTop="15dip"
+                android:text="@string/zero"
+                android:textColor="@color/black"
+                android:textSize="25px" />
+            
+            <TextView
+                android:id="@+id/lblAvgBloodPressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dip"
+                android:paddingTop="17dip"
+                android:text="@string/zero"
+                android:textColor="@color/black"
+                android:textSize="25px" />
+            
+            <TextView
+                android:id="@+id/lblAvgAcceleration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dip"
+                android:paddingTop="17dip"
+                android:text="@string/zero"
+                android:textColor="@color/black"
+                android:textSize="25px" />
+            
+            <TextView
+                android:id="@+id/lblTotalTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dip"
+                android:paddingTop="20dip"
+                android:text="@string/zero"
+                android:textColor="@color/black"
+                android:textSize="25px" />
+            
+            <TextView
+                android:id="@+id/lblLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dip"
+                android:paddingTop="19dip"
+                android:text="@string/empty"
+                android:textColor="@color/black"
+                android:textSize="25px" />
+            
+            <TextView
+                android:id="@+id/lblPostLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dip"
+                android:paddingTop="18dip"
+                android:text="@string/empty"
+                android:textColor="@color/black"
+                android:textSize="25px" />
+            
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,94 @@
+﻿@model SmartVitals_Server.Models.UserInfo
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<h2>UserProfile</h2>
+
+@using (Ajax.BeginForm("UserProfile", "Home", new AjaxOptions { UpdateTargetId = "message" }))
+{
+    <div id="details">
+        <div id="message">@ViewBag.Message</div>
+        <fieldset>
+            <legend>User Profile</legend>
+            @Html.HiddenFor(m =>m.UserName)
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Name)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Height)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Height.Feet)
+                @Html.ValidationMessageFor(m => m.Height.Feet)
+                <br />
+                 @Html.TextBoxFor(m => m.Height.Inches)
+                @Html.ValidationMessageFor(m => m.Height.Inches)
+
+            </div>
+
+            @*<div class="editor-label">
+                @Html.LabelFor(m => m.Weight)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Weight)
+                @Html.ValidationMessageFor(m => m.Weight)
+            </div>*@
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Sex)
+            </div>
+            <div class="editor-field">
+                <div class="editor-field">
+                    @Html.RadioButtonFor(model => model.Sex, "Male", new { Checked = "checked" })Male
+                    <br />
+                    @Html.RadioButtonFor(model => model.Sex, "Female", null)Female
+                </div>
+            </div>
+                        <div class="editor-label">
+                @Html.LabelFor(m => m.Weight)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Weight)
+                @Html.ValidationMessageFor(m => m.Weight)
+            </div>
+                        <div class="editor-label">
+                @Html.LabelFor(m => m.Age)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Age)
+                @Html.ValidationMessageFor(m => m.Age)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Phone)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Phone)
+                @Html.ValidationMessageFor(m => m.Phone)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Email)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Preferences)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Preferences)
+                @Html.ValidationMessageFor(m => m.Preferences)
+            </div>
+            <p>
+                <input type="submit" value="Update" />
+            </p>
+        </fieldset>
+    </div>
+}

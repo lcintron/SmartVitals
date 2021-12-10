@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bck"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:background="@drawable/topbar"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="10dip"
+            android:background="@null"
+            android:src="@drawable/back" />
+
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:layout_marginLeft="245dip"
+            android:background="@null"
+            android:src="@drawable/settings" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:src="@drawable/sv" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/preferences"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <CheckBox
+            android:id="@+id/chkGeolocationOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dip"
+            android:layout_marginTop="45dip"
+            android:text="" />
+
+         <CheckBox
+             android:id="@+id/chkGeolocationCaching"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="30dip"
+             android:layout_marginTop="2dip"
+             android:text="" />
+
+          <CheckBox
+              android:id="@+id/chkHistoryCaching"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="30dip"
+              android:layout_marginTop="1dip"
+              android:text="" />
+
+           <CheckBox
+               android:id="@+id/chkSyncToWeb"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="30dip"
+               android:layout_marginTop="0dip"
+               android:text="" />
+
+           <Button
+               android:id="@+id/btnClearHistory"
+               android:layout_width="wrap_content"
+               android:layout_height="35dip"
+               android:layout_marginLeft="35dip"
+               android:layout_marginTop="59dip"
+               android:text="clear" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,268 @@
+﻿@model SmartVitals.Services.Models.Test
+@{
+    ViewBag.Title = "Test Details";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<center>
+    <h2>
+        Test Details</h2>
+    <p>
+        Date: @Model.Date</p>
+    <p>
+        Description: @Model.Description</p>
+    <p>
+        <a href="#" class="t-button t-state-default" onclick="mapDialog(@Model.Latitude, @Model.Longitude)">
+            View Map</a></p>
+    <script type="text/javascript">
+        function mapDialog(Latitude, Longitude) {
+            window.open("http://maps.googleapis.com/maps/api/staticmap?center=" + Latitude + "," + Longitude + "&zoom=14&size=400x400&sensor=false", "Location",
+                            "status=0, height=400, width=400, resizable=0");
+        }
+    </script>
+   <br /></center>
+<fieldset>
+<legend>Samples</legend>
+@(Html.Telerik().Grid<SmartVitals_Server.Models.Sample>()
+        .Name("Tests")
+        .DataKeys(key => key.Add(t => t.TestId))
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.Time).Width(20).Aggregate(aggregates => aggregates.Max())
+                    .ClientFooterTemplate("Total Time: <#= Max #>").Visible(false);
+            columns.Bound(o => o.EKG).Width(200).Aggregate(aggregates => aggregates.Average().Count().Min().Max())
+                    .ClientFooterTemplate("Avg: <#=$.telerik.formatString('{0:0.00}',Average) #>" +
+                        "<div>Min: <#= Min #></div>" +
+                        "<div>Max: <#= Max #></div>");
+            columns.Bound(o => o.HeartRate).Width(200).Aggregate(aggregates => aggregates.Average().Count().Min().Max())
+                    .ClientFooterTemplate("Avg: <#= $.telerik.formatString('{0:0.00}',Average )#>bpm" +
+                        "<div>Min: <#= Min #>bpm</div>" +
+                        "<div>Max: <#= Max #>bpm</div>");
+            columns.Bound(o => o.RespirationRate).Width(200).Aggregate(aggregates => aggregates.Average().Count().Min().Max())
+                    .ClientFooterTemplate("Avg: <#= $.telerik.formatString('{0:0.00}',Average )#>bpm" +
+                        "<div>Min: <#= Min #>bpm</div>" +
+                        "<div>Max: <#= Max #>bpm</div>");
+            columns.Bound(o => o.SkinTemperature).Width(200).Aggregate(aggregates => aggregates.Average().Count().Min().Max())
+                    .ClientFooterTemplate("Avg: <#= $.telerik.formatString('{0:0.00}',Average )#>°" +
+                        "<div>Min: <#= Min #>°</div>" +
+                        "<div>Max: <#= Max #>°</div>");
+            columns.Bound(o => o.Posture).Width(200).Aggregate(aggregates => aggregates.Average().Count().Min().Max())
+                    .ClientFooterTemplate("Avg:<#= $.telerik.formatString('{0:0.00}',Average )#>°" +
+                        "<div>Min: <#= Min #>°</div>" +
+                        "<div>Max: <#= Max #>°</div>");
+            columns.Bound(o => o.AccX).Width(200).Aggregate(aggregates => aggregates.Average().Count().Min().Max())
+                    .ClientFooterTemplate("Avg: <#= $.telerik.formatString('{0:0.00}',Average )#>G" +
+                        "<div>Min: <#= Min #>G</div>" +
+                        "<div>Max: <#= Max #>G</div>");
+            columns.Bound(o => o.AccY).Width(200).Aggregate(aggregates => aggregates.Average().Count().Min().Max())
+                    .ClientFooterTemplate("Avg: <#= $.telerik.formatString('{0:0.00}',Average )#>G" +
+                        "<div>Min: <#= Min #>G</div>" +
+                        "<div>Max: <#= Max #>G</div>");
+            columns.Bound(o => o.AccZ).Width(200).Aggregate(aggregates => aggregates.Average().Count().Min().Max())
+                    .ClientFooterTemplate("Avg: <#= $.telerik.formatString('{0:0.00}',Average )#>G" +
+                        "<div>Min: <#= Min #>G</div>" +
+                        "<div>Max: <#= Max #>G</div>");
+        })
+         .DataBinding(dataBinding => dataBinding.Ajax().Select("GetSamples", "Home"))
+        .Sortable()
+        .Pageable()
+        .Groupable(settings => settings.Groups(groups => groups.Add(o => o.Time)).Visible(false))
+)
+</fieldset>
+<br />
+<fieldset>
+<legend>Charts</legend>
+
+@(Html.Telerik().Chart(Model.Samples)
+    .Name("ekg")
+    .Title(title => title
+        .Text("EKG")
+        .Visible(true)
+    )
+    .Legend(legend => legend
+        .Visible(false)
+    )
+    .SeriesDefaults(series =>
+    {
+        series.Line();
+    })
+    .Series(series =>
+    {
+        series.Line(s => s.EKG).Name("EKG").Markers(false);
+    })
+    .CategoryAxis(axis => axis
+        .Categories(s => s.Time).Labels(l => l.Step(@Model.Samples.Count<10?10:@Model.Samples.Count/10).Format("{0:#,##0}"))
+    )
+    .ValueAxis(axis => axis
+            .Numeric().Labels(labels => labels.Format("{0:#,##0}"))
+    )
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Format("{0:#,##0}")
+    )
+    .HtmlAttributes(new { style = "width: auto; height: 400px;" })
+)
+<br />
+@(Html.Telerik().Chart(Model.Samples)
+    .Name("heartRate")
+    .Title(title => title
+        .Text("Heart Rate")
+        .Visible(true)
+    )
+    .Legend(legend => legend
+        .Visible(false)
+    )
+    .SeriesDefaults(series =>
+    {
+        series.Line();
+    })
+    .Series(series =>
+    {
+        series.Line(s => s.HeartRate).Name("rate").Markers(true);
+    })
+    .CategoryAxis(axis => axis
+        .Categories(s => s.Time).Labels(l => l.Step(@Model.Samples.Count<10?10:@Model.Samples.Count/10).Format("{0:#,##0}"))
+    )
+    .ValueAxis(axis => axis
+            .Numeric().Labels(labels => labels.Format("{0:#,##0}"))
+    )
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Format("{0:#,##0}")
+    )
+    .HtmlAttributes(new { style = "width: auto; height: 400px;" })
+)
+
+<br />
+@(Html.Telerik().Chart(Model.Samples)
+    .Name("respirationRate")
+    .Title(title => title
+        .Text("Respiration Rate")
+        .Visible(true)
+    )
+    .Legend(legend => legend
+        .Visible(false)
+    )
+    .SeriesDefaults(series =>
+    {
+        series.Line();
+    })
+    .Series(series =>
+    {
+        series.Line(s => s.RespirationRate).Name("RespirationRate").Markers(true);
+    })
+    .CategoryAxis(axis => axis
+        .Categories(s => s.Time).Labels(l => l.Step(@Model.Samples.Count<10?10:@Model.Samples.Count/10).Format("{0:#,##0}"))
+    )
+    .ValueAxis(axis => axis
+            .Numeric().Labels(labels => labels.Format("{0:#,##0}"))
+    )
+    .YAxis(y => y.Numeric("rate").Title("Rate (bpm)"))
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Format("{0:#,##0}")
+    )
+    .HtmlAttributes(new { style = "width: auto; height: 400px;" })
+)
+<br />
+@(Html.Telerik().Chart(Model.Samples)
+    .Name("Posture")
+    .Title(title => title
+        .Text("Posture")
+        .Visible(true)
+    )
+    .Legend(legend => legend
+        .Visible(false)
+    )
+    .SeriesDefaults(series =>
+    {
+        series.Line();
+    })
+    .Series(series =>
+    {
+        series.Line(s => s.Posture).Name("Posture").Markers(true);
+    })
+    .CategoryAxis(axis => axis
+        .Categories(s => s.Time).Labels(l => l.Step(@Model.Samples.Count<10?10:@Model.Samples.Count/10).Format("{0:#,##0}"))
+    )
+    .ValueAxis(axis => axis
+                .Numeric().Labels(labels => labels.Format("{0:#,##0}°"))
+    )
+    .YAxis(y => y.Numeric("degrees").Title("Degrees"))
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Format("{0:#,##0}")
+    )
+    .HtmlAttributes(new { style = "width: auto; height: 400px;" })
+)
+<br />
+@(Html.Telerik().Chart(Model.Samples)
+    .Name("skinTemperature")
+    .Title(title => title
+        .Text("Skin Temperature")
+        .Visible(true)
+    )
+    .Legend(legend => legend
+        .Visible(false)
+    )
+    .SeriesDefaults(series =>
+    {
+        series.Line();
+    })
+    .Series(series =>
+    {
+        series.Line(s => s.SkinTemperature).Name("SkinTemperature").Markers(true);
+    })
+    .CategoryAxis(axis => axis
+        .Categories(s => s.Time).Labels(l => l.Step(@Model.Samples.Count<10?10:@Model.Samples.Count/10).Format("{0:#,##0}"))
+    )
+    .ValueAxis(axis => axis
+                .Numeric().Labels(labels => labels.Format("{0:#,##0}°C"))
+    )
+        .YAxis(y => y.Numeric().Title("Temperature (°C)"))
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Format("{0:#,##0}")
+    )
+    .HtmlAttributes(new { style = "width: auto; height: 400px;" })
+)
+
+<br />
+@(Html.Telerik().Chart(Model.Samples)
+    .Name("acceleration")
+    .Title(title => title
+        .Text("Acceleration")
+        .Visible(true)
+    )
+    .Legend(legend => legend
+        .Visible(true)
+    )
+    .SeriesDefaults(series =>
+    {
+        series.Line();
+    })
+    .Series(series =>
+    {
+        series.Line(s => s.AccX).Name("X").Markers(true);
+    })
+    .Series(series =>
+    {
+        series.Line(s => s.AccY).Name("Y").Markers(true);
+    })
+    .Series(series =>
+    {
+        series.Line(s => s.AccZ).Name("Z").Markers(true);
+    })
+    .CategoryAxis(axis => axis
+        .Categories(s => s.Time).Labels(l => l.Step(@Model.Samples.Count<10?10:@Model.Samples.Count/10).Format("{0:#,##0}"))
+    )
+    .ValueAxis(axis => axis
+            .Numeric().Labels(labels => labels.Format("{0:#,##0}G"))
+    )
+    .YAxis(y => y.Numeric().Title("Force (G)"))
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Format("{0:#,##0}")
+    )
+    .HtmlAttributes(new { style = "width: auto; height: 400px;" })
+)
+</fieldset>

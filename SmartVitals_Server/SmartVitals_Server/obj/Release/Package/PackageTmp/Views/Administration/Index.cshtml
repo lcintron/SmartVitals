@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Administration";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<h2>Administration</h2>
+
+
+<br />
+<fieldset style="width:auto">
+<legend>Users</legend>
+<a href="/Account/Register/" class="t-button t-state-default">Add User</a>
+@(Html.Telerik().Grid<SmartVitals_Server.Models.User>()
+            .Name("Sessions")
+            .Columns(columns =>
+            {
+                columns.Bound(o => o.UserName);
+                columns.Bound(o => o.Email).Title("Email");
+                columns.Bound(o => o.Roles).Title("Roles");
+                columns.Bound(o => o.LastActivity).Title("Last Activity");
+                columns.Command(commands => commands
+                    .Custom("deleteUser")
+                    .Text("Delete")
+                    .DataRouteValues(route => route.Add(o => o.UserName).RouteKey("UserName"))
+                    .Ajax(true)
+                    .Action("DeleteUser", "Home"))
+                    .Title("Actions")
+                .HtmlAttributes(new { style = "text-align: center" });
+            })
+                .DataBinding(databinding => databinding.Ajax().Select("GetUsers", "Administration"))
+                .ClientEvents(events => events.OnError("onError"))
+                .ClientEvents(events => events.OnComplete("onComplete"))
+                .Pageable( p => p.PageSize(20))
+                .Scrollable()
+                .Filterable()
+                .Sortable())
+</fieldset>
+<br />
+<fieldset>
+<legend>Sessions</legend>
+@(Html.Telerik().Grid<SmartVitals_Server.Models.Session>()
+            .Name("Sessions")
+            .Columns(columns =>
+            {
+                columns.Bound(o => o.SessionId).Visible(false);
+                columns.Bound(o => o.UserName).Title("User").Width(15);
+                columns.Bound(o => o.SessionGuid).Title("Session Id").Width(40);
+                columns.Bound(o => o.DeviceId).Title("Device").Width(40);
+                columns.Bound(o => o.OpenedOn).Format("{0:MM/dd/yyyy}").Width(15);
+                columns.Bound(o => o.ClosedOn).Format("{0:MM/dd/yyyy}").Width(15);
+                columns.Command(commands => commands
+                    .Custom("removeSession")
+                    .Text("Clear")
+                    .DataRouteValues(route => route.Add(o => o.SessionId).RouteKey("SessionId"))
+                    .Ajax(true)
+                    .Action("ClearSessions", "Home"))
+                    .Title("Actions")
+                .HtmlAttributes(new { style = "text-align: center" })
+                .Width(15);
+            })
+                .DataBinding(databinding => databinding.Ajax().Select("GetSessions", "Home"))
+                .ClientEvents(events => events.OnError("onError"))
+                .ClientEvents(events => events.OnComplete("onComplete"))
+                .Pageable( p => p.PageSize(20))
+                .Scrollable()
+                .Filterable()
+                .Sortable())
+</fieldset>
+<script type="text/javascript">
+    function onComplete(e) {
+        if (e.name == 'removeSession') {
+            Message('Session cleared!');
+            refreshTelerikGrid($('#Sessions'));
+        }
+    }
+
+    function refreshTelerikGrid(grid) {
+        var tgrid = grid.data("tGrid");
+        tgrid.rebind();
+    }
+</script>
+<br />

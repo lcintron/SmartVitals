@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../../Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="../../Scripts/Smartvitals.js"></script>
+@(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.telerik.css").Combined(true).Compress(true)))</head>
+<body>
+    <div class="page">
+        <header>
+            <div id="title">
+                <div style="float:right">
+                     @if(Request.IsAuthenticated) {
+                        <text>Welcome <strong>@User.Identity.Name</strong>!
+                            [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
+                    }
+                    else {
+                        <text><table id="tblLogin"><tr style="height:10px"><td>username</td><td>password</td><td></td></tr>
+                         <tr><td><input type="text" id="userName" class="txtlogin" /></td>
+                             <td><input type="password" id="password" class="txtlogin" /></td><td><a href="#" class="btnlogin" style="width:42px; text-align:center;" onclick="Authenticate()">login</a></td></tr>
+                             <tr align="right"><td colspan="3" align="right">Testers are welcome!&nbsp;<a href="/Account/Register" class="btnlogin" style="width:42px">sign up</a></td></tr></table></text>
+                    }
+                </div>
+                <a href="#" onclick="goHome()"><img src="../../Content/Images/header.png" alt="SmartVitals"/></a>
+                <img src="../../Content/Images/line.png" alt="SmartVitals" title="SmartVitals" style="margin-left:auto;margin-right:auto; margin-top:10px" width="100%"/>
+            </div>
+        </header>
+        <section id="main">
+            @RenderBody()
+        </section>
+        <footer>
+           Designs and web development by <a href="http://www.luiscintron.net">Luis Cintron</a>. Copyright &copy; 2012.<br/>
+        </footer>
+    </div>
+</html>
