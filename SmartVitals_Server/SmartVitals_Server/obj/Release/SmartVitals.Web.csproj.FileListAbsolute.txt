@@ -1,7 +1,0 @@
-C:\Development\SmartVitals_Server\SmartVitals_Server\bin\SmartVitals_Server.dll
-C:\Development\SmartVitals_Server\SmartVitals_Server\bin\SmartVitals_Server.pdb
-C:\Development\SmartVitals_Server\SmartVitals_Server\bin\Telerik.Web.Mvc.pdb
-C:\Development\SmartVitals_Server\SmartVitals_Server\bin\Telerik.Web.Mvc.xml
-C:\Development\SmartVitals_Server\SmartVitals_Server\obj\Release\SmartVitals_Server.dll
-C:\Development\SmartVitals_Server\SmartVitals_Server\obj\Release\SmartVitals_Server.pdb
-C:\Development\SmartVitals_Server\SmartVitals_Server\obj\Release\SmartVitals.Web.csprojResolveAssemblyReference.cache

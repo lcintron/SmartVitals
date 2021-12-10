@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="ApplicationServices-Web.config Connection String" description="ApplicationServices Connection String used in web.config by the application to access the database." defaultvalue="data source=mssql0925.dotnet-host.com;Initial Catalog=smartvitalscontext; User ID=sv_user; Password=Temp1234!" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Development\\SmartVitals_Server\\SmartVitals_Server\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ApplicationServices']/@connectionString" />
-  </parameter>
-  <parameter name="SmartVitalsContext-Web.config Connection String" description="SmartVitalsContext Connection String used in web.config by the application to access the database." defaultvalue="data source=mssql0925.dotnet-host.com;Initial Catalog=smartvitalscontext; User ID=sv_user; Password=Temp1234!" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Development\\SmartVitals_Server\\SmartVitals_Server\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SmartVitalsContext']/@connectionString" />
-  </parameter>
-</parameters>
